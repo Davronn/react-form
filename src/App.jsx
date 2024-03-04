@@ -128,12 +128,7 @@ const PupilManagement = () => {
               <td>{pupil.salary}</td>
               <td>{pupil.isMarried ? "Ha" : "Yo'q"}</td>
               <td className="text-end">
-                <button
-                  className="btn btn-outline-primary me-2"
-                  onClick={() => editPupil(pupil.id)}
-                >
-                  Tahrirlash
-                </button>
+                
                 <button
                   className="btn btn-outline-danger"
                   onClick={() => deletePupil(pupil.id)}
