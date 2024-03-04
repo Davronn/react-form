@@ -1,37 +1,37 @@
 import React, { useState, useEffect } from "react";
 
-const City = ["Toshkent", "Samarqand", "Bukhara"];
-const Position = ["React", "Nodejs", "JS"];
-const TypePosition = ["junior", "middle", "senior", "team"];
+let City = ["Toshkent", "Samarqand", "Bukhara"];
+let Position = ["React", "Nodejs", "JS"];
+let TypePosition = ["junior", "middle", "senior", "team"];
 
-const PupilManagement = () => {
-  const [pupils, setPupils] = useState([]);
-  const [selectedPupil, setSelectedPupil] = useState(null);
-  const [searchInput, setSearchInput] = useState("");
-  const [filterPosition, setFilterPosition] = useState(
+let PupilManagement = () => {
+  let [pupils, setPupils] = useState([]);
+  let [selectedPupil, setSelectedPupil] = useState(null);
+  let [searchInput, setSearchInput] = useState("");
+  let [filterPosition, setFilterPosition] = useState(
     "Lavozim turini tanlang"
   );
-  const [filterCity, setFilterCity] = useState("Manzilni tanlang");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  let [filterCity, setFilterCity] = useState("Manzilni tanlang");
+  let [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    const storedPupils = JSON.parse(localStorage.getItem("pupils")) || [];
+    let storedPupils = JSON.parse(localStorage.getItem("pupils")) || [];
     setPupils(storedPupils);
   }, []);
 
-  const toggleModal = () => {
+  let toggleModal = () => {
     setIsModalOpen(!isModalOpen);
     setSelectedPupil(null);
   };
 
-  const handleFormSubmit = (e) => {
+  let handleFormSubmit = (e) => {
     e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    const pupilData = Object.fromEntries(formData.entries());
+    let form = e.target;
+    let formData = new FormData(form);
+    let pupilData = Object.fromEntries(formData.entries());
 
     if (selectedPupil) {
-      const updatedPupils = pupils.map((pupil) =>
+      let updatedPupils = pupils.map((pupil) =>
         pupil.id === selectedPupil.id ? { ...pupil, ...pupilData } : pupil
       );
       setPupils(updatedPupils);
@@ -45,16 +45,16 @@ const PupilManagement = () => {
     toggleModal();
   };
 
-  const editPupil = (id) => {
-    const pupil = pupils.find((pupil) => pupil.id === id);
+  let editPupil = (id) => {
+    let pupil = pupils.find((pupil) => pupil.id === id);
     setSelectedPupil(pupil);
     toggleModal();
   };
 
-  const deletePupil = (id) => {
-    const isConfirm = window.confirm("O'chirilsinmi ?");
+  let deletePupil = (id) => {
+    let isConfirm = window.confirm("O'chirilsinmi ?");
     if (isConfirm) {
-      const updatedPupils = pupils.filter((pupil) => pupil.id !== id);
+      let updatedPupils = pupils.filter((pupil) => pupil.id !== id);
       setPupils(updatedPupils);
       localStorage.setItem("pupils", JSON.stringify(updatedPupils));
     }
@@ -128,9 +128,10 @@ const PupilManagement = () => {
               <td>{pupil.salary}</td>
               <td>{pupil.isMarried ? "Ha" : "Yo'q"}</td>
               <td className="text-end">
-                
+                <button className="btn btn-outline-info"
+                >O'zgartirish</button>
                 <button
-                  className="btn btn-outline-danger"
+                  className="btn btn-outline-danger m-1"
                   onClick={() => deletePupil(pupil.id)}
                 >
                   O'chirish
